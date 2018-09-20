@@ -81,15 +81,9 @@ SingleTab::SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebo
     title = _title;
     parent = _parent;
     // WebKit2: WebKitWebView is scrollable by itself, so you don't need to embed it in a GtkScrolledWindow.
-    //scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-    //gtk_widget_show (scrolledwindow);
-    //gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
-    //gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-    //gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
     webview = webkit_web_view_new();
     gtk_widget_show (webview);
-    //gtk_container_add (GTK_CONTAINER (scrolledwindow), webview);
 
     tab_label = gtk_label_new_with_mnemonic (title.c_str());
     gtk_notebook_append_page((GtkNotebook *)notebook, webview, tab_label);
@@ -239,13 +233,13 @@ extern Concordance *concordance;
 
 void SingleTab::html_link_clicked (const gchar * url)
 {
-  // Store scrolling position for the now active url.
+  // Store scrolling position for the now active url. (Is this duplicated from above?)
   //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   //scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
 
   //DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
   //DEBUG("active_url="+active_url+" new url="+ustring(url))
-  
+
   // New url.
   parent->active_url = url;
   ustring myurl = url;

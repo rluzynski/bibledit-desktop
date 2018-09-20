@@ -48,10 +48,8 @@ public:
     SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);
     ~SingleTab();
     void updateHtml(HtmlWriter2 &html);
-    // I might not have to store any of these...
-    //GtkWidget *scrolledwindow; // owned by the notebook, I think
     GtkWidget *tab_label; // owned by the notebook, I think
-    GtkWidget *webview; // owned by scrolled window
+    GtkWidget *webview; // owned by notebook
 private:
     ustring title;
     WindowTabbed *parent;
@@ -70,8 +68,6 @@ private:
 			   WebKitPolicyDecision    *decision,
 			   WebKitPolicyDecisionType decision_type);
 
-    //    static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-    //void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
     void html_link_clicked (const gchar * url);
     Reference get_reference (const ustring& text);
 };
@@ -82,7 +78,6 @@ class WindowTabbed : public FloatingWindow
 public:
     WindowTabbed(ustring _title, GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
     virtual ~WindowTabbed();
-    void Concordance(const ustring &projname);
     void newTab(const ustring &tabTitle, HtmlWriter2 &tabHtml);    // create a new tab, fill with given content
     void updateTab(const ustring &tabTitle, HtmlWriter2 &tabHtml); // update existing tab, all new content
     GtkWidget * signalVerseChange;
