@@ -186,6 +186,11 @@ int main(int argc, char *argv[])
   gw_message("GTK version   \t" + std::to_string(gtk_get_major_version()) + "." +
                                   std::to_string(gtk_get_minor_version()) + "." +
 	                          std::to_string(gtk_get_micro_version()));
+
+  gw_message("WEBKIT2       \t" + std::to_string(webkit_get_major_version()) + "." +
+                                  std::to_string(webkit_get_minor_version()) + "." +
+	                          std::to_string(webkit_get_micro_version()));
+  
   // Check on runtime requirements.
   runtime_initialize ();
   // Initialize the xml library.
