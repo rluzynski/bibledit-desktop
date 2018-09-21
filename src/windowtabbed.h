@@ -56,9 +56,8 @@ private:
     WindowTabbed *parent;
     friend class WindowTabbed;
     
-    // Callbacks. These routines are replicated several times throughout the code base. Any way to refactor so as to simplify?
-    // You might think in the floating window base class, but some windows are webviews, and others are other custom things,
-    // so that might not work too well!
+    // Callbacks. These routines are replicated several times throughout the code base. Some of it is factored
+    // into webview_simple.h/cpp
     static gboolean
       on_decide_policy_cb (WebKitWebView           *web_view,
 			   WebKitPolicyDecision    *decision,
