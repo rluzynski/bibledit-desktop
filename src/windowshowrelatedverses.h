@@ -28,12 +28,12 @@
 #include "floatingwindow.h"
 #include "htmlwriter2.h"
 #include <webkit2/webkit2.h>
-
+#include "webview_simple.h"
 
 enum RelatedItemType {ritNone, ritKeytermId, ritStrongNumber, ritParallels};
 
 
-class WindowShowRelatedVerses : public FloatingWindow
+class WindowShowRelatedVerses : public FloatingWindow, webview_simple
 {
 public:
   WindowShowRelatedVerses(GtkWidget * parent_layout, GtkAccelGroup *accelerator_group, bool startup);
@@ -48,9 +48,17 @@ protected:
 private:
   Reference myreference;
   ustring myproject;
+
+  static gboolean
+    on_decide_policy_cb (WebKitWebView           *web_view,
+			 WebKitPolicyDecision    *decision,
+			 WebKitPolicyDecisionType decision_type,
+			 gpointer                 user_data);
+
+  // void decide_policy_cb (called by above) is provided by the base class webview_simple
+  // and the following has to be implemented by this class.
   void load_webview (const gchar * url);
-  static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-  void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
+
   ustring active_url;
   map <ustring, unsigned int> scrolling_position;
   static void thread_start(gpointer data);

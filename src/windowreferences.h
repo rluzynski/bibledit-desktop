@@ -52,8 +52,16 @@ private:
   void open();
   void load (const ustring & filename);
   void clear();
-  static gboolean on_navigation_policy_decision_requested (WebKitWebView *web_view, WebKitWebFrame *frame, WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision, gpointer user_data);
-  void navigation_policy_decision_requested (WebKitNetworkRequest *request, WebKitWebNavigationAction *navigation_action, WebKitWebPolicyDecision *policy_decision);
+  static gboolean
+    on_decide_policy_cb (WebKitWebView           *web_view,
+			 WebKitPolicyDecision    *decision,
+			 WebKitPolicyDecisionType decision_type,
+			 gpointer                 user_data);
+
+  void decide_policy_cb (WebKitWebView           *web_view,
+			 WebKitPolicyDecision    *decision,
+			 WebKitPolicyDecisionType decision_type);
+
   void load_webview (const gchar *url);
   ustring active_url;
   map <ustring, unsigned int> scrolling_position;

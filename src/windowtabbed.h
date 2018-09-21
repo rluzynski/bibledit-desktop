@@ -27,6 +27,7 @@
 #include "htmlwriter2.h"
 #include "editor.h"
 #include <webkit2/webkit2.h>
+#include "webview_simple.h"
 
 //----------------------------------------------------------------------------------
 // The tabbed window is a GTK notebook that can display information about the text
@@ -42,7 +43,7 @@ class WindowTabbed; // forward declaration
 // A tabbed (notebook) window can contain any number of SingleTab's. Each "thing" 
 // that is intended to go into a tab should inherit from this class. For instance,
 // a concordance tab "is" a SingleTab.
-class SingleTab
+class SingleTab : webview_simple
 {
 public:
     SingleTab(const ustring &_title, HtmlWriter2 &html, GtkWidget *notebook, WindowTabbed *_parent);
@@ -64,12 +65,10 @@ private:
 			   WebKitPolicyDecisionType decision_type,
 			   gpointer                 user_data);
 
-    void decide_policy_cb (WebKitWebView           *web_view,
-			   WebKitPolicyDecision    *decision,
-			   WebKitPolicyDecisionType decision_type);
-
-    void html_link_clicked (const gchar * url);
-    Reference get_reference (const ustring& text);
+    // void decide_policy_cb (called by above) is provided by the base class webview_simple
+    // and the following has to be implemented by this class.
+    void webview_process_navigation (const gchar * url);
+    Reference get_reference (const ustring& text); // There is a to do here; see .cpp file
 };
 
 class WindowTabbed : public FloatingWindow

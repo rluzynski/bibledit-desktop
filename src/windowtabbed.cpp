@@ -141,22 +141,24 @@ SingleTab::on_decide_policy_cb (WebKitWebView           *web_view,
 				gpointer                 user_data)
 {
   ((SingleTab *) user_data)->decide_policy_cb (web_view, decision, decision_type);
+  // For above, see webview_simple.cpp
   return true;
 }
 
+#if 0
 void SingleTab::decide_policy_cb (WebKitWebView           *web_view,
 				  WebKitPolicyDecision    *decision,
 				  WebKitPolicyDecisionType decision_type)
 {
 // Callback for clicking a link.
-#if 0
+//#if 0
   // I don't know how to do this with web_view...since it is not contained in a scrolledwindow anymore...
   // Store scrolling position for the now active url.
   GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
   scrolling_position[active_url] = gtk_adjustment_get_value (adjustment);
   
   DEBUG("remember old scroll position="+std::to_string(scrolling_position[active_url])+" for old active_url="+active_url)
-#endif
+//#endif
     switch (decision_type) {
     case WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION:
       {
@@ -175,7 +177,7 @@ void SingleTab::decide_policy_cb (WebKitWebView           *web_view,
 	  const gchar *uri = webkit_uri_request_get_uri (request);
 
   	  // Load new page depending on the pseudo-link clicked.
-	  html_link_clicked (uri);
+	  webview_process_navigation (uri);
 	}
 	  break;
 	case WEBKIT_NAVIGATION_TYPE_FORM_SUBMITTED: // The navigation was triggered by submitting a form.
@@ -213,7 +215,8 @@ void SingleTab::decide_policy_cb (WebKitWebView           *web_view,
     }
   return;
   // return value handled by the above callback func; maybe shouldn't be.
- }
+}
+#endif
 
 // This is reproduced from windowcheckkeyterms.cpp, and should be 
 // factored out into the reference class.
@@ -231,7 +234,7 @@ Reference SingleTab::get_reference (const ustring& text)
 
 extern Concordance *concordance;
 
-void SingleTab::html_link_clicked (const gchar * url)
+void SingleTab::webview_process_navigation (const gchar * url)
 {
   // Store scrolling position for the now active url. (Is this duplicated from above?)
   //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));
