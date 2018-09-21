@@ -234,7 +234,7 @@ Reference SingleTab::get_reference (const ustring& text)
 
 extern Concordance *concordance;
 
-void SingleTab::webview_process_navigation (const gchar * url)
+void SingleTab::webview_process_navigation (const ustring &url)
 {
   // Store scrolling position for the now active url. (Is this duplicated from above?)
   //GtkAdjustment * adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow_terms));

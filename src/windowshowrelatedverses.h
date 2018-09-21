@@ -57,7 +57,7 @@ private:
 
   // void decide_policy_cb (called by above) is provided by the base class webview_simple
   // and the following has to be implemented by this class.
-  void load_webview (const gchar * url);
+  void load_webview (const ustring &url);
 
   ustring active_url;
   map <ustring, unsigned int> scrolling_position;

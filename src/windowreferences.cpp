@@ -435,7 +435,7 @@ void WindowReferences::navigation_policy_decision_requested (WebKitNetworkReques
 }
 #endif
 
-void WindowReferences::webview_process_navigation (const gchar *url)
+void WindowReferences::webview_process_navigation (const ustring &url)
 {
   // New url.
   active_url = url;

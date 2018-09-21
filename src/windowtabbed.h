@@ -66,7 +66,7 @@ private:
 
     // void decide_policy_cb (called by above) is provided by the base class webview_simple
     // and the following has to be implemented by this class.
-    void webview_process_navigation (const gchar * url);
+    void webview_process_navigation (const ustring &url /*gchar * url*/);
     Reference get_reference (const ustring& text); // There is a to do here; see .cpp file
 };
 

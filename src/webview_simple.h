@@ -21,6 +21,7 @@
 #define INCLUDED_WEBVIEW_SIMPLE_H
 
 #include <webkit2/webkit2.h>
+#include "ustring.h"
 
 // This class abstracts out some code that is common to several windows that
 // show simple content in a webview.
@@ -33,7 +34,7 @@ class webview_simple {
   // Ensure that this class cannot be instantiated, using this
   // pure virtual method. The derived class MUST implement
   // this method for things to work.
-  virtual void webview_process_navigation (const gchar * url) = 0;
+  virtual void webview_process_navigation (const ustring &url /*gchar * url*/) = 0;
 };
 
 #endif

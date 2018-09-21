@@ -118,7 +118,7 @@ void WindowShowRelatedVerses::decide_policy_cb (WebKitWebView           *web_vie
 }
 #endif
 
-void WindowShowRelatedVerses::load_webview (const gchar * url)
+void WindowShowRelatedVerses::load_webview (const ustring &url)
 {
   // New url.
   active_url = url;
