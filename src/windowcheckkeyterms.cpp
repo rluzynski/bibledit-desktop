@@ -447,6 +447,7 @@ void WindowCheckKeyterms::navigation_policy_decision_requested (WebKitNetworkReq
 }
 #endif
 
+// Called by webview_simple::decide_policy_cb
 // newCollection=true if we are loading the index of an entirely new set of keywords
 void WindowCheckKeyterms::webview_process_navigation (const ustring& url)
 {

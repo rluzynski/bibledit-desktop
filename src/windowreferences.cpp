@@ -435,6 +435,7 @@ void WindowReferences::navigation_policy_decision_requested (WebKitNetworkReques
 }
 #endif
 
+// Called by webview_simple::decide_policy_cb
 void WindowReferences::webview_process_navigation (const ustring &url)
 {
   // New url.

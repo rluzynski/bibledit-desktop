@@ -114,11 +114,12 @@ void WindowShowRelatedVerses::decide_policy_cb (WebKitWebView           *web_vie
   webkit_web_policy_decision_ignore (policy_decision);
   
   // Load new page depending on the pseudo-link clicked.
-  load_webview (webkit_network_request_get_uri (request));
+  webview_process_navigation (webkit_network_request_get_uri (request));
 }
 #endif
 
-void WindowShowRelatedVerses::load_webview (const ustring &url)
+// Called by webview_simple::decide_policy_cb
+void WindowShowRelatedVerses::webview_process_navigation (const ustring &url)
 {
   // New url.
   active_url = url;
