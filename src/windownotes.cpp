@@ -843,8 +843,9 @@ void WindowNotes::cut()
 {
   // Cut to clipboard if editing.
   if (note_being_edited()) {
-    if (last_focused_widget == webview_note_editor)
+    if (last_focused_widget == webview_note_editor) {
       webkit_web_view_cut_clipboard (WEBKIT_WEB_VIEW (webview_note_editor));
+    }
     if (last_focused_widget == textview_note_references) {
       GtkClipboard *clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
       gtk_text_buffer_cut_clipboard(note_editor->textbuffer_references, clipboard, true);
