@@ -75,7 +75,8 @@ void WindowShowRelatedVerses::go_to(const ustring & project, const Reference & r
     //event_id = g_timeout_add_full(G_PRIORITY_DEFAULT, 1000, GSourceFunc(on_timeout), gpointer(this), NULL);
     // Call directly instead of overhead of above; seems to cut time in 
     // half to display the related words.
-    load_webview("");
+    //load_webview("");
+    webview_process_navigation ("");
   }
 }
 
@@ -89,11 +90,10 @@ WindowShowRelatedVerses::on_decide_policy_cb (WebKitWebView           *web_view,
   return true;
 }
 
-
 #if 0
 void WindowShowRelatedVerses::decide_policy_cb (WebKitWebView           *web_view,
-					       WebKitPolicyDecision    *decision,
-					       WebKitPolicyDecisionType decision_type)
+						WebKitPolicyDecision    *decision,
+						WebKitPolicyDecisionType decision_type)
 // Callback for clicking a link.
 {
   //#if 0
@@ -117,7 +117,6 @@ void WindowShowRelatedVerses::decide_policy_cb (WebKitWebView           *web_vie
   webview_process_navigation (webkit_network_request_get_uri (request));
 }
 #endif
-
 // Called by webview_simple::decide_policy_cb
 void WindowShowRelatedVerses::webview_process_navigation (const ustring &url)
 {
@@ -263,7 +262,7 @@ void WindowShowRelatedVerses::thread_main(gpointer data)
 {
   thread_runs = false;
 }
-
+#if 0
 // These two methods only serve to slow down the rendering of show
 // related verses -- MAP 1/13/2015
 bool WindowShowRelatedVerses::on_timeout(gpointer user_data)
@@ -277,4 +276,4 @@ bool WindowShowRelatedVerses::timeout()
   load_webview ("");
   return false;
 }
-
+#endif
